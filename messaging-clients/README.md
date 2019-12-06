@@ -2,9 +2,10 @@
 
 ``shell
 
-oc new-project cloud-pi-clients
+oc new-project cloudpi-clients
 
-oc create -f build.yaml
-oc create -f deploy.yaml
+oc create -f build.yaml -n cloudpi-clients
+oc create -f deploy.yaml -n cloudpi-clients
+
 ```
 

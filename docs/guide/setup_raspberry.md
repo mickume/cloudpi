@@ -1,6 +1,4 @@
-# Install software
-
-## Setup the Raspberry Pi
+# Setup the Raspberry Pi
 
 ### Preapre the boot disk
 

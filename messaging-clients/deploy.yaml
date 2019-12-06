@@ -50,21 +50,3 @@ items:
           kind: ImageStreamTag
           name: ubi8-amqp:latest
       type: ImageChange
-
-- kind: Service
-  apiVersion: 'v1'
-  metadata:
-    labels:
-      app: amqp-clients
-    name: amqp-clients
-  spec:
-    ports:
-    - name: 8080-tcp
-      port: 8080
-      protocol: TCP
-      targetPort: 8080
-    selector:
-      app: amqp-clients
-      deploymentconfig: amqp-clients
-  status:
-    loadBalancer: {}

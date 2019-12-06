@@ -3,6 +3,9 @@
 site/
 .DS_Store
 hack/
+enmasse-*
+*.pem
+*.pub
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

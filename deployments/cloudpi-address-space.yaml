@@ -1,0 +1,9 @@
+apiVersion: enmasse.io/v1beta1
+kind: AddressSpace
+metadata:
+  name: cloudpi
+spec:
+  type: standard
+  plan: standard-unlimited-with-mqtt
+  authenticationService:
+    name: standard-authservice
