@@ -28,7 +28,7 @@ items:
       type: Docker
       dockerStrategy:
         dockerfilePath: Dockerfile.rhel8
-        forcePull: true
+        forcePull: false
     
     output:
       to:
