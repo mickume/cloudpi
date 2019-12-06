@@ -7,7 +7,7 @@ ENV LC_ALL="en_US.UTF-8" \
     APP_ROOT="/opt/app-root"
 
 USER root
-RUN sudo yum install telnet
+RUN yum install telnet
 
 # Copy extra files to the image
 COPY ./root/ /
