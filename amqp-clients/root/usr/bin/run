@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cat <<EOF
-This is a UBI base image:
+This is a UBI base image
 EOF
 
 while true

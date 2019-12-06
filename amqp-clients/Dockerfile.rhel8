@@ -18,4 +18,4 @@ RUN chown -R 1001:0 ${APP_ROOT} && chmod -R ug+rwx ${APP_ROOT}
 
 USER 1001
 
-CMD usage
+CMD ["run"]
