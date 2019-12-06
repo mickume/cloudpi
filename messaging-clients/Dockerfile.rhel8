@@ -6,12 +6,13 @@ ENV LC_ALL="en_US.UTF-8" \
     LANG="en_US.UTF-8" \
     APP_ROOT="/opt/app-root"
 
+USER root
+RUN sudo yum install telnet
+
 # Copy extra files to the image
 COPY ./root/ /
 
 WORKDIR ${APP_ROOT}
-
-RUN yum install telnet
 
 # upgrade pip and install stuff
 RUN pip install --upgrade pip
