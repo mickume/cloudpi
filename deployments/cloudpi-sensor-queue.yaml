@@ -1,8 +1,0 @@
-apiVersion: enmasse.io/v1beta1
-kind: Address
-metadata:
-    name: cloudpi.sensors
-spec:
-    address: sensors
-    type: queue
-    plan: standard-small-queue

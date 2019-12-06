@@ -13,8 +13,7 @@ WORKDIR ${APP_ROOT}
 
 # upgrade pip and install stuff
 RUN pip install --upgrade pip
-RUN pip install paho-mqtt && \ 
-    pip install python-qpid-proton
+RUN pip install paho-mqtt
 
 # add the clients
 COPY src/ src
