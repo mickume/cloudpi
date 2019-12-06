@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo "Connecting to $MESSAGING_URL"
-./receive.py -a $MESSAGING_URL
+echo "Connecting to $AMQP_MESSAGING_URL:$AMQP_MESSAGING_PORT/$ADDRESS"
+./receive.py -a "$AMQP_MESSAGING_URL:$AMQP_MESSAGING_PORT/$ADDRESS"

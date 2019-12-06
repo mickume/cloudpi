@@ -26,8 +26,16 @@ items:
       spec:
         containers:
           - env:
-            - name: MESSAGING_URL
-              value: "amqp://messaging.enmasse-infra.svc:5672/queue1"
+            - name: MQTT_MESSAGING_URL
+              value: "mqtt.enmasse-infra.svc"
+            - name: MQTT_MESSAGING_PORT
+              value: "1883"
+            - name: AMQP_MESSAGING_URL
+              value: "messaging.enmasse-infra.svc"
+            - name: AMQP_MESSAGING_PORT
+              value: "5672"
+            - name: ADDRESS
+              value: sensors
 
             image: ubi8-amqp:latest
             imagePullPolicy: Always

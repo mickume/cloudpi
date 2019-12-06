@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo "Sending to $MESSAGING_URL"
-./send.py -a -a $MESSAGING_URL
+echo "Connecting to $AMQP_MESSAGING_URL:$AMQP_MESSAGING_PORT/$ADDRESS"
+./send.py -a "$AMQP_MESSAGING_URL:$AMQP_MESSAGING_PORT/$ADDRESS"
 

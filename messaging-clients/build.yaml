@@ -22,7 +22,7 @@ items:
       git:
         uri: 'https://github.com/mickuehl/cloudpi.git'
         ref: 'master'
-      contextDir: 'amqp-clients'
+      contextDir: 'messaging-clients'
     
     strategy:
       type: Docker
