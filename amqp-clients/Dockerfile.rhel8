@@ -1,0 +1,4 @@
+FROM registry.access.redhat.com/ubi8/ubi
+
+WORKDIR /
+COPY forever_recv.py send.py oc_rsend oc_freceive /
