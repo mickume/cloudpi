@@ -93,12 +93,13 @@ items:
 - kind: Service
   apiVersion: "v1"
   metadata:
-    name: 'hivemq-web'
+    name: 'web'
     labels:
       app: hivemq-ce
   spec:
     ports:
       - name: web
+        protocol: TCP
         port: 8080
         targetPort: 8080
     selector:
@@ -113,6 +114,7 @@ items:
   spec:
     ports:
       - name: mqtt
+        protocol: TCP
         port: 1883
         targetPort: 1883
     selector:
@@ -126,7 +128,7 @@ items:
       app: hivemq-ce
   spec:
     accessModes:
-      - ReadWriteMany
+      - ReadWriteOnce
     resources:
       requests:
         storage: '1Gi'

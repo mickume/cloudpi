@@ -25,6 +25,7 @@ RUN set -x \
     && apt-get remove -y gnupg gnupg-agent dirmngr && rm -rf /var/lib/apt/lists/*
 
 COPY config.xml /opt/config.xml
+COPY logback.xml /opt/logback.xml
 
 # HiveMQ setup
 RUN curl -L https://github.com/hivemq/hivemq-community-edition/releases/download/${HIVEMQ_CE_VERSION}/hivemq-ce-${HIVEMQ_CE_VERSION}.zip -o /opt/hivemq-${HIVEMQ_CE_VERSION}.zip \

@@ -4,6 +4,7 @@ site/
 .DS_Store
 hack/
 enmasse-*
+hivemq-ce-*
 *.pem
 *.pub
 *.key
