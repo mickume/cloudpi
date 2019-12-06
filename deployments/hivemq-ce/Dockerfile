@@ -46,7 +46,7 @@ VOLUME /opt/hivemq/data
 # Persist log data
 VOLUME /opt/hivemq/log
 
-EXPOSE 1883
+EXPOSE 1883 8080
 
 WORKDIR /opt/hivemq
 USER ${HIVEMQ_UID}
