@@ -17,7 +17,7 @@ RUN pip install paho-mqtt && \
     pip install python-qpid-proton
 
 # add the clients
-COPY forever_recv.py random_send.py send receive src
+COPY receive.py send.py send receive src
 
 # Drop the root user and make the content of /opt/app-root owned by user 1001
 RUN chown -R 1001:0 ${APP_ROOT} && chmod -R ug+rwx ${APP_ROOT}

@@ -1,5 +1,4 @@
 #!/bin/bash
 
 echo "Connecting to $MESSAGING_URL"
-./forever_recv.py -a $MESSAGING_URL
-
+./receive.py -a $MESSAGING_URL
