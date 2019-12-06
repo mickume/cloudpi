@@ -1,11 +1,5 @@
 #!/bin/bash
 
-ADDRESS="$1"
-if [ -z "$1" ]
-  then
-    echo "setting ADDRESS to anycast"
-    ADDRESS="anycast"
-fi
-
-./random_send.py -a "amqps://messaging-enmasse.amq.io:443/$ADDRESS"
+echo "Sending to $MESSAGING_URL"
+./random_send.py -a -a $MESSAGING_URL
 

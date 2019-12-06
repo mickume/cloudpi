@@ -26,8 +26,8 @@ items:
       spec:
         containers:
           - env:
-            #- name: JAVA_APP_JAR
-            #  value: mythaistar-bootified.war
+            - name: MESSAGING_URL
+              value: "amqp://messaging.enmasse-infra.svc:5672/queue1"
 
             image: ubi8-amqp:latest
             imagePullPolicy: Always
