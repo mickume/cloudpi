@@ -27,4 +27,7 @@ oc delete clusterroles -l app=enmasse
 oc delete apiservices -l app=enmasse
 oc delete oauthclients -l app=enmasse
 
+oc delete deployment -l app=enmasse
+oc delete svc -l app=enmasse
+
 ```

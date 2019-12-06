@@ -13,6 +13,7 @@ A list of usefull resources ...
 
 ### MQTT
 * http://www.steves-internet-guide.com/client-connections-python-mqtt/
+* https://www.informatik-aktuell.de/betrieb/netzwerke/mqtt-deployments-in-containerbasierten-anwendungsplattformen-wie-openshift.html
 
 ### EnMasse
 * https://enmasse.io/
