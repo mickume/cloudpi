@@ -24,8 +24,6 @@ parser.add_option('-t', '--transport', default='tcp')
 options, remainder = parser.parse_args()
 
 client = mqtt.Client(client_id='mqtt_client', transport=options.transport)
-
-client.enable_logger(logger=logging.DEBUG)
 client.username_pw_set('cloudpi1', password='Y2xvdWRwaTEK')
 
 client.on_connect = on_connect
