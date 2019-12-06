@@ -1,5 +1,7 @@
 FROM registry.access.redhat.com/ubi8/python-36
 
+EXPOSE 8080
+
 ENV LC_ALL="en_US.UTF-8" \
     LANG="en_US.UTF-8" \
     APP_ROOT="/opt/app-root"

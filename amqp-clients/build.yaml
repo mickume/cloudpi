@@ -33,7 +33,7 @@ items:
     output:
       to:
         kind: ImageStreamTag
-        name: 'ubi8-amqp:1.0'
+        name: 'ubi8-amqp:latest'
         #namespace: openshift
 
 - kind: ImageStream

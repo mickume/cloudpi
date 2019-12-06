@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: List
+items:
+
+- kind: DeploymentConfig
+  apiVersion: 'v1'
+  metadata:
+    labels:
+      app: amqp-clients
+    name: amqp-clients
+  spec:
+    replicas: 1
+    
+    selector:
+      app: amqp-clients
+      deploymentconfig: amqp-clients
+    strategy:
+      resources: {}
+    
+    template:
+      metadata:
+        labels:
+          app: amqp-clients
+          deploymentconfig: amqp-clients
+      
+      spec:
+        containers:
+          - env:
+            #- name: JAVA_APP_JAR
+            #  value: mythaistar-bootified.war
+
+            image: ubi8-amqp:latest
+            imagePullPolicy: Always
+            name: amqp-clients
+            
+            ports:
+            - containerPort: 8080
+              protocol: TCP
+            resources: {}
+    
+    test: false
+    
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - amqp-clients
+        from:
+          kind: ImageStreamTag
+          name: ubi8-amqp:latest
+      type: ImageChange
+
+- kind: Service
+  apiVersion: 'v1'
+  metadata:
+    labels:
+      app: amqp-clients
+    name: amqp-clients
+  spec:
+    ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: amqp-clients
+      deploymentconfig: amqp-clients
+  status:
+    loadBalancer: {}
