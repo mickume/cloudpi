@@ -11,11 +11,16 @@ COPY ./root/ /
 
 WORKDIR ${APP_ROOT}
 
-COPY forever_recv.py send.py oc_rsend oc_freceive /
+# upgrade pip and install stuff
+RUN pip install --upgrade pip
+RUN pip install paho-mqtt && \ 
+    pip install python-qpid-proton
+
+# add the clients
+COPY forever_recv.py send.py oc_rsend oc_freceive src
 
 # Drop the root user and make the content of /opt/app-root owned by user 1001
 RUN chown -R 1001:0 ${APP_ROOT} && chmod -R ug+rwx ${APP_ROOT}
 
 USER 1001
-
 CMD ["run"]
