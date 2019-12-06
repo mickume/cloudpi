@@ -10,19 +10,16 @@ items:
     name: amqp-clients
   spec:
     replicas: 1
-    
     selector:
       app: amqp-clients
       deploymentconfig: amqp-clients
     strategy:
       resources: {}
-    
     template:
       metadata:
         labels:
           app: amqp-clients
           deploymentconfig: amqp-clients
-      
       spec:
         containers:
           - env:
@@ -36,18 +33,11 @@ items:
               value: "5672"
             - name: ADDRESS
               value: sensors
-
             image: ubi8-amqp:latest
             imagePullPolicy: Always
             name: amqp-clients
-            
-            ports:
-            - containerPort: 8080
-              protocol: TCP
             resources: {}
-    
     test: false
-    
     triggers:
     - type: ConfigChange
     - imageChangeParams:
@@ -58,3 +48,43 @@ items:
           kind: ImageStreamTag
           name: ubi8-amqp:latest
       type: ImageChange
+
+- kind: BuildConfig
+  apiVersion: 'v1'
+  metadata:
+    name: 'ubi8-amqp'
+    annotations:
+      description: AMQP base image for everything
+      tags: python amqp mqtt
+    labels:
+      runtime: python
+  spec:
+    runPolicy: 'Serial' 
+    triggers: 
+      - type: 'ImageChange'
+    source: 
+      git:
+        uri: 'https://github.com/mickuehl/cloudpi.git'
+        ref: 'master'
+      contextDir: 'messaging-clients'
+    strategy:
+      type: Docker
+      dockerStrategy:
+        dockerfilePath: Dockerfile.rhel8
+        forcePull: false
+    output:
+      to:
+        kind: ImageStreamTag
+        name: 'ubi8-amqp:latest'
+        #namespace: openshift
+
+- kind: ImageStream
+  apiVersion: 'v1'
+  metadata:
+    name: 'ubi8-amqp'
+    annotations:
+      description: AMQP base image for everything
+      tags: python amqp mqtt
+    labels:
+      runtime: python
+    #namespace: openshift
