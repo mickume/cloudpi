@@ -1,5 +1,7 @@
 FROM openjdk:11-jre-slim
 
+EXPOSE 1883 8080
+
 ARG HIVEMQ_CE_VERSION=2019.1
 ARG HIVEMQ_GID=10000
 ARG HIVEMQ_UID=10000
@@ -44,9 +46,7 @@ RUN sed -i -e 's|eval \\"java\\" "$HOME_OPT" "$JAVA_OPTS" -jar "$JAR_PATH"|exec 
 VOLUME /opt/hivemq/data
 
 # Persist log data
-VOLUME /opt/hivemq/log
-
-EXPOSE 1883 8080
+#VOLUME /opt/hivemq/log
 
 WORKDIR /opt/hivemq
 USER ${HIVEMQ_UID}
