@@ -11,7 +11,7 @@ ENV JAVA_OPTS "-XX:+UseNUMA"
 ENV TINI_VERSION v0.18.0
 
 RUN set -x \
-    && apt-get update && apt-get install -y --no-install-recommends curl gnupg gnupg-agent dirmngr \
+    && apt-get update && apt-get install -y --no-install-recommends curl gnupg gnupg-agent dirmngr unzip \
     && curl -fSL "https://github.com/krallin/tini/releases/download/$TINI_VERSION/tini" -o /usr/local/bin/tini \
     && curl -fSL "https://github.com/krallin/tini/releases/download/$TINI_VERSION/tini.asc" -o /usr/local/bin/tini.asc \
     && export GNUPGHOME="$(mktemp -d)" \
