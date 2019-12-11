@@ -7,10 +7,10 @@ ENV HIVEMQ_CE_VERSION=2019.1 \
     APP_ROOT="/opt/app-root" 
 
 # install basics and OpenJDK11
-RUN set -x && yum install -y curl java-11-openjdk-devel.x86_64 unzip
+RUN set -x && yum install -y wget java-11-openjdk-devel.x86_64 unzip
 
 # install HiveMQ
-RUN curl -L https://github.com/hivemq/hivemq-community-edition/releases/download/${HIVEMQ_CE_VERSION}/hivemq-ce-${HIVEMQ_CE_VERSION}.zip -o ${APP_ROOT}/hivemq-${HIVEMQ_CE_VERSION}.zip \
+RUN wget -O ${APP_ROOT}/hivemq-${HIVEMQ_CE_VERSION}.zip https://github.com/hivemq/hivemq-community-edition/releases/download/${HIVEMQ_CE_VERSION}/hivemq-ce-${HIVEMQ_CE_VERSION}.zip \
     && unzip ${APP_ROOT}/hivemq-${HIVEMQ_CE_VERSION}.zip  -d ${APP_ROOT}\
     && rm -f ${APP_ROOT}/hivemq-${HIVEMQ_CE_VERSION}.zip \
     && mv ${APP_ROOT}/hivemq-ce-${HIVEMQ_CE_VERSION} ${APP_ROOT}/hivemq
