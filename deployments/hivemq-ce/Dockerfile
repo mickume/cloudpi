@@ -6,7 +6,7 @@ ENV HIVEMQ_CE_VERSION=2019.1 \
     JAVA_OPTS="-XX:+UseNUMA" \
     APP_ROOT="/opt/app-root" 
 
-RUN set -x && apt-get update && apt-get install -y --no-install-recommends curl java-11-openjdk-devel.x86_64 unzip
+RUN set -x && yum install -y curl java-11-openjdk-devel.x86_64 unzip
 
 COPY config.xml ${APP_ROOT}/config.xml
 COPY logback.xml ${APP_ROOT}/logback.xml
