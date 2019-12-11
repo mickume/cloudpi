@@ -1,3 +1,4 @@
+#!/bin/bash
 
 echo ""
 echo "  HiveMQ Start Script for Linux/Unix v1.10"
