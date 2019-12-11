@@ -40,6 +40,6 @@ RUN chown -R 1001:0 /opt && chmod -R ug+rwx /opt
 WORKDIR ${APP_ROOT}/hivemq
 USER 1001
 
-CMD ["java", "-Dhivemq.home=$HOME_OPT", "$JAVA_OPTS","-jar", "$JAR_PATH"]
+CMD ["java", "-Dhivemq.home=/opt/app-root/hivemq", $JAVA_OPTS, "-jar", $JAR_PATH]
 #CMD ["/opt/app-root/hivemq/bin/run.sh"]
 #exec "java" ${HOME_OPT} ${JAVA_OPTS} -jar ${JAR_PATH}
