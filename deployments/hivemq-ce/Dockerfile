@@ -26,8 +26,8 @@ RUN curl -L https://github.com/hivemq/hivemq-community-edition/releases/download
     #&& chmod -R 777 /opt \
     #&& chmod +x /opt/hivemq/bin/run.sh
 
-COPY config.xml ${APP_ROOT}/hivemq/config.xml
-COPY logback.xml ${APP_ROOT}/hivemq/logback.xml
+COPY config.xml ${APP_ROOT}/hivemq/conf/config.xml
+COPY logback.xml ${APP_ROOT}/hivemq/conf/logback.xml
 
 # Substitute eval for exec and replace OOM flag if necessary (for older releases). This is necessary for proper signal propagation
 RUN sed -i -e 's|eval \\"java\\" "$HOME_OPT" "$JAVA_OPTS" -jar "$JAR_PATH"|exec "java" $HOME_OPT $JAVA_OPTS -jar "$JAR_PATH"|' ${APP_ROOT}/hivemq/bin/run.sh && \
@@ -38,6 +38,9 @@ RUN sed -i -e 's|eval \\"java\\" "$HOME_OPT" "$JAVA_OPTS" -jar "$JAR_PATH"|exec 
 
 # Persist log data
 #VOLUME /opt/hivemq/log
+
+# Drop the root user and make the content of /opt/app-root owned by user 1001
+RUN chown -R 1001:0 /opt && chmod -R ug+rwx /opt
 
 WORKDIR ${APP_ROOT}/hivemq
 USER 1001
