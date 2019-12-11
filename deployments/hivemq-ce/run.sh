@@ -23,5 +23,10 @@ JAR_PATH="$HIVEMQ_FOLDER/bin/hivemq.jar"
 echo ""
 echo "java ${HOME_OPT} ${JAVA_OPTS} ${JAVA_EXTRA_OPTS} -jar ${JAR_PATH}"
 echo ""
+while true
+do
+	echo "..."
+	sleep 10
+done
 
-exec "java" ${HOME_OPT} ${JAVA_OPTS} ${JAVA_EXTRA_OPTS} -jar ${JAR_PATH}
+#exec "java" ${HOME_OPT} ${JAVA_OPTS} ${JAVA_EXTRA_OPTS} -jar ${JAR_PATH}
