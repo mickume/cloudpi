@@ -16,12 +16,12 @@ JAVA_OPTS="$JAVA_OPTS -Djava.security.egd=file:/dev/./urandom"
 JAVA_OPTS="$JAVA_OPTS -XX:+CrashOnOutOfMemoryError"
 # JMX Monitoring
 # JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
-HOME_OPT="-Dhivemq.home=$HIVEMQ_FOLDER"
+HIVEMQ_HOME_OPTS="-Dhivemq.home=${HIVEMQ_HOME}"
 
-JAR_PATH="$HIVEMQ_FOLDER/bin/hivemq.jar"
+JAR_PATH="$HIVEMQ_HOME/bin/hivemq.jar"
 
 echo ""
-echo "java ${HOME_OPT} ${JAVA_OPTS} ${JAVA_EXTRA_OPTS} -jar ${JAR_PATH}"
+echo "java ${HIVEMQ_HOME_OPTS} ${JAVA_OPTS} ${JAVA_EXTRA_OPTS} -jar ${JAR_PATH}"
 echo ""
 while true
 do

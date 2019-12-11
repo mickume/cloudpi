@@ -4,7 +4,7 @@ EXPOSE 1883
 
 ENV HIVEMQ_CE_VERSION=2019.1 \
     APP_ROOT="/opt/app-root" \
-    OPT_HOME="/opt/app-root/hivemq" \
+    HIVEMQ_HOME="/opt/app-root/hivemq" \
     JAR_PATH="/opt/app-root/hivemq/bin/hivemq.jar" \
     JAVA_EXTRA_OPTS=""
     
