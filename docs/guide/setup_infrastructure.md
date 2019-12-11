@@ -7,7 +7,7 @@
 ```shell
 
 # create the address space
-oc apply -f deployments/cloudpi-address-space.yaml -n cloudpi-clients
+oc apply -f deployments/cloudpi-mqtt/cloudpi-address-space.yaml -n cloudpi-clients
 
 ```
 
