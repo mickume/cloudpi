@@ -18,4 +18,9 @@ JAVA_OPTS="$JAVA_OPTS -XX:+CrashOnOutOfMemoryError"
 HOME_OPT="-Dhivemq.home=$HIVEMQ_FOLDER"
 
 JAR_PATH="$HIVEMQ_FOLDER/bin/hivemq.jar"
+
+echo ""
+echo "java ${HOME_OPT} ${JAVA_OPTS} ${JAVA_EXTRA_OPTS} -jar ${JAR_PATH}"
+echo ""
+
 exec "java" ${HOME_OPT} ${JAVA_OPTS} ${JAVA_EXTRA_OPTS} -jar ${JAR_PATH}

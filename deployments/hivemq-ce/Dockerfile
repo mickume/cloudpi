@@ -40,4 +40,4 @@ RUN chown -R 1001:0 /opt && chmod -R ug+rwx /opt
 WORKDIR ${APP_ROOT}/hivemq
 USER 1001
 
-CMD ["./bin/run.sh"]
+CMD ["/opt/app-root/hivemq/bin/run.sh"]
