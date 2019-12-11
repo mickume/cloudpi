@@ -8,6 +8,7 @@ ENV HIVEMQ_CE_VERSION=2019.1 \
     JAR_PATH="/opt/app-root/hivemq/bin/hivemq.jar"
     
 ENV JAVA_OPTS="-XX:+UseNUMA -Djava.net.preferIPv4Stack=true -noverify --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED --add-exports java.base/jdk.internal.misc=ALL-UNNAMED -Djava.security.egd=file:/dev/./urandom -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -XX:+CrashOnOutOfMemoryError"
+ENV RUN_OPTS = "-Dhivemq.home=${OPT_HOME} ${JAVA_OPTS} -jar ${JAR_PATH}"
 
 # install basics and OpenJDK11
 RUN set -x && yum install -y wget java-11-openjdk-devel.x86_64 unzip
@@ -40,6 +41,7 @@ RUN chown -R 1001:0 /opt && chmod -R ug+rwx /opt
 WORKDIR ${APP_ROOT}/hivemq
 USER 1001
 
-CMD ["java", "-Dhivemq.home=/opt/app-root/hivemq", $JAVA_OPTS, "-jar", $JAR_PATH]
+RUN echo $RUN_OPTS
+CMD ["java", $RUN_OPTS]
 #CMD ["/opt/app-root/hivemq/bin/run.sh"]
 #exec "java" ${HOME_OPT} ${JAVA_OPTS} -jar ${JAR_PATH}
