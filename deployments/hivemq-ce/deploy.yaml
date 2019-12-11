@@ -32,13 +32,13 @@ items:
             - containerPort: 1883
               protocol: TCP
             resources: {}
-            #volumeMounts:
-            #  - mountPath: /opt/hivemq/data
-            #    name: 'hivemq-data'
-        #volumes:
-        #  - name: 'hivemq-data'
-        #    persistentVolumeClaim:
-        #      claimName: 'hivemq'
+            volumeMounts:
+              - mountPath: /opt/app-root/hivemq/data
+                name: 'hivemq-data'
+        volumes:
+          - name: 'hivemq-data'
+            persistentVolumeClaim:
+              claimName: 'hivemq'
     test: false
     triggers:
     - type: ConfigChange
@@ -66,3 +66,15 @@ items:
     selector:
       name: 'hivemq-ce'
 
+- kind: PersistentVolumeClaim
+  apiVersion: "v1"
+  metadata:
+    name: 'hivemq'
+    labels:
+      app: hivemq-ce
+  spec:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: '1Gi'
