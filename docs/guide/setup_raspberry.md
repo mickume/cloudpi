@@ -45,6 +45,8 @@ ping rasberrypi.local
 ssh pi@raspberrypi
 ```
 
+Password is `raspberry` initially.
+
 ### Update the boot image
 
 ```shell
@@ -62,8 +64,12 @@ Change the following:
 
 * change default password for pi
 * change hostname
-* enable Interfacing Options | I2C
-* enable Interfacing Options | Camera
+
+Enable
+
+* Interfacing Options | ssh
+* Interfacing Options | I2C
+* Interfacing Options | Camera
 * Advanced Options | Exapand Filesystem
 
 Choose and hit enter. Reboot.

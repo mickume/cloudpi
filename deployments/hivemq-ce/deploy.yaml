@@ -72,7 +72,7 @@ items:
               protocol: TCP
             resources: {}
             volumeMounts:
-              - mountPath: /opt/hivemq/log
+              - mountPath: /opt/hivemq/data
                 name: 'hivemq-data'
         volumes:
           - name: 'hivemq-data'

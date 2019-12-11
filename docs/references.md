@@ -23,3 +23,22 @@ A list of usefull resources ...
 * https://github.com/EnMasseProject/enmasse
 * https://github.com/lulf/openshift-amqp-clients/tree/master/python
 
+### Astro Pi
+
+* https://github.com/astro-pi
+* https://github.com/raspberrypilearning/astro-pi-guide
+
+* https://github.com/raspberrypilearning/sense-hat-minecraft-map
+* https://github.com/astro-pi/SpaceCRAFT
+
+
+### Sense HAT
+
+* https://github.com/bennuttall/sense-hat-examples
+* https://projects.raspberrypi.org/en/projects?hardware[]=sense-hat
+* https://randomnerdtutorials.com/video-streaming-with-raspberry-pi-camera/
+
+### RaspberryPi & Go
+
+* https://gobot.io/documentation/platforms/raspi/
+

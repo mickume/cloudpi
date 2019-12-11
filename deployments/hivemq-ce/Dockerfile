@@ -33,6 +33,7 @@ RUN curl -L https://github.com/hivemq/hivemq-community-edition/releases/download
     && rm -f /opt/hivemq-${HIVEMQ_CE_VERSION}.zip \
     && ln -s /opt/hivemq-ce-${HIVEMQ_CE_VERSION} /opt/hivemq \
     && mv /opt/config.xml /opt/hivemq-ce-${HIVEMQ_CE_VERSION}/conf/config.xml \
+    && mv /opt/logback.xml /opt/hivemq-ce-${HIVEMQ_CE_VERSION}/conf/logback.xml \
     && groupadd --gid ${HIVEMQ_GID} hivemq \
     && useradd -g hivemq -d /opt/hivemq -s /bin/bash --uid ${HIVEMQ_UID} hivemq \
     && chown -R hivemq:hivemq /opt/hivemq-ce-${HIVEMQ_CE_VERSION} \
