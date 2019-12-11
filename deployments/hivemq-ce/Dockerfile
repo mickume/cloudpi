@@ -3,12 +3,11 @@ FROM registry.access.redhat.com/ubi8/ubi
 EXPOSE 1883
 
 ENV HIVEMQ_CE_VERSION=2019.1 \
-    JAVA_OPTS="-XX:+UseNUMA" \
     APP_ROOT="/opt/app-root" \
     OPT_HOME="/opt/app-root/hivemq" \
     JAR_PATH="/opt/app-root/hivemq/bin/hivemq.jar"
     
-ENV JAVA_OPTS="-Djava.net.preferIPv4Stack=true -noverify --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED --add-exports java.base/jdk.internal.misc=ALL-UNNAMED -Djava.security.egd=file:/dev/./urandom -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -XX:+CrashOnOutOfMemoryError"
+ENV JAVA_OPTS="-XX:+UseNUMA -Djava.net.preferIPv4Stack=true -noverify --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED --add-exports java.base/jdk.internal.misc=ALL-UNNAMED -Djava.security.egd=file:/dev/./urandom -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -XX:+CrashOnOutOfMemoryError"
 
 # install basics and OpenJDK11
 RUN set -x && yum install -y wget java-11-openjdk-devel.x86_64 unzip
@@ -41,6 +40,6 @@ RUN chown -R 1001:0 /opt && chmod -R ug+rwx /opt
 WORKDIR ${APP_ROOT}/hivemq
 USER 1001
 
-CMD ["exec", "java", "-Dhivemq.home=$HOME_OPT", "$JAVA_OPTS","-jar", "$JAR_PATH"]
+CMD ["java", "-Dhivemq.home=$HOME_OPT", "$JAVA_OPTS","-jar", "$JAR_PATH"]
 #CMD ["/opt/app-root/hivemq/bin/run.sh"]
 #exec "java" ${HOME_OPT} ${JAVA_OPTS} -jar ${JAR_PATH}
