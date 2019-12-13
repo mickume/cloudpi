@@ -1,0 +1,12 @@
+apiVersion: user.enmasse.io/v1beta1
+kind: MessagingUser
+metadata:
+  name: cloudpi-mqtt.cloudpi1
+spec:
+  username: cloudpi
+  authentication:
+    type: password
+    password: Y2xvdWRwaQo= # Base64 encoded
+  authorization:
+    - addresses: ["sensors"]
+      operations: ["send", "recv"]

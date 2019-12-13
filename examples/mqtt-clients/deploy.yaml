@@ -6,20 +6,20 @@ items:
   apiVersion: 'v1'
   metadata:
     labels:
-      app: amqp-clients
-    name: amqp-clients
+      app: mqtt-clients
+    name: mqtt-clients
   spec:
     replicas: 1
     selector:
-      app: amqp-clients
-      deploymentconfig: amqp-clients
+      app: mqtt-clients
+      deploymentconfig: mqtt-clients
     strategy:
       resources: {}
     template:
       metadata:
         labels:
-          app: amqp-clients
-          deploymentconfig: amqp-clients
+          app: mqtt-clients
+          deploymentconfig: mqtt-clients
       spec:
         containers:
           - env:
@@ -33,9 +33,9 @@ items:
               value: "5672"
             - name: ADDRESS
               value: sensors
-            image: ubi8-amqp:latest
+            image: ubi8-mqtt:latest
             imagePullPolicy: Always
-            name: amqp-clients
+            name: mqtt-clients
             resources: {}
     test: false
     triggers:
@@ -43,21 +43,21 @@ items:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - amqp-clients
+        - mqtt-clients
         from:
           kind: ImageStreamTag
-          name: ubi8-amqp:latest
+          name: ubi8-mqtt:latest
       type: ImageChange
 
 - kind: BuildConfig
   apiVersion: 'v1'
   metadata:
-    name: 'ubi8-amqp'
+    name: 'mqtt-clients'
     annotations:
-      description: AMQP base image for everything
-      tags: python amqp mqtt
+      description: Base image for everything
+      tags: "python,amqp,mqtt"
     labels:
-      runtime: python
+      app: mqtt-clients
   spec:
     runPolicy: 'Serial' 
     triggers: 
@@ -66,7 +66,7 @@ items:
       git:
         uri: 'https://github.com/mickuehl/cloudpi.git'
         ref: 'master'
-      contextDir: 'messaging-clients'
+      contextDir: 'examples/mqtt-clients'
     strategy:
       type: Docker
       dockerStrategy:
@@ -75,16 +75,16 @@ items:
     output:
       to:
         kind: ImageStreamTag
-        name: 'ubi8-amqp:latest'
+        name: 'ubi8-mqtt:latest'
         #namespace: openshift
 
 - kind: ImageStream
   apiVersion: 'v1'
   metadata:
-    name: 'ubi8-amqp'
+    name: 'ubi8-mqtt'
     annotations:
-      description: AMQP base image for everything
-      tags: python amqp mqtt
+      description: Base image for everything
+      tags: "python,amqp,mqtt"
     labels:
-      runtime: python
+      app: mqtt-clients
     #namespace: openshift

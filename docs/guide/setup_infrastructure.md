@@ -1,64 +1,71 @@
-# Infrastructure Setup
+# Overview
+
+The next section shows how to install the MQTT messaging infrastructure, how to create a basic configuration and how to query messaging endpoints. 
+
+### Install Enmasse
+
+```shell
+cd bin/enmasse-*
+
+export ENMASSE=enmasse-infra
+oc new-project $ENMASSE
+
+oc apply -f install/bundles/enmasse -n $ENMASSE
+
+oc apply -f install/components/example-plans -n $ENMASSE
+oc apply -f install/components/example-roles -n $ENMASSE
+```
+
+### Authentication Service
+
+```shell
+oc apply -f install/components/example-authservices/standard-authservice.yaml -n $ENMASSE
+```
 
 ### Create an address space
 
-#### Without own SSL
-
 ```shell
-
-# create the address space
-oc apply -f deployments/cloudpi-mqtt/cloudpi-address-space.yaml -n cloudpi-clients
-
+oc apply -f deployments/cloudpi-mqtt/cloudpi-address-space.yaml -n cloudpi-mqtt
 ```
 
-#### With own SSL
+### Create queues
 
 ```shell
-
-#openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout cloudpi.key -out cloudpi.pem
-
-openssl req -x509 -newkey rsa:2048 -keyout cloudpi_private.pem -nodes -out cloudpi.pub -subj /CN=unused
-
-cat cloudpi_private.pem | base64 > cloudpi_private64.pem
-cat cloudpi.pub | base64 > cloudpi64.pub
-
-# make a copy of deployments/cloudpi-address-space-cert.yaml
-cp deployments/cloudpi-address-space-cert.yaml deployments/cloudpi-address-space-mycert.yaml
-
-# add the base64 encode parts 
-# ...
-
-# apply 
-oc apply -f deployments/cloudpi-address-space-mycert.yaml -n cloudpi-clients
-
+oc apply -f deployments/cloudpi-mqtt/cloudpi-sensor-queue.yaml -n cloudpi-mqtt
 ```
 
-### Create queues and users
+### Create users
 
 ```shell
-
-# create queues
-oc apply -f deployments/cloudpi-sensor-queue.yaml -n cloudpi-clients
-
-# create users
-oc apply -f deployments/cloudpi-cloudpi1-user.yaml -n cloudpi-clients
-
+oc apply -f deployments/cloudpi-mqtt/cloudpi-user.yaml -n cloudpi-mqtt
 ```
 
+### Query address space metadata
+
+
+#### Get all metadata
+
 ```shell
+oc get addressspace -o yaml -n cloudpi-mqtt
+```
 
-oc get addressspace -o yaml -n cloudpi-clients
+#### Get endpoint hostnames
 
-oc get addressspace -n cloudpi-clients -o 'jsonpath={.status.endpointStatuses[?(@.name=="messaging")].externalHost}'
+```shell
+oc get addressspace -n cloudpi-mqtt -o=jsonpath='{.items[0].status.endpointStatuses[?(@.name=="messaging")].externalHost}'
 
-#oc get addressspace -n cloudpi-clients -o yaml | grep 'externalHost: mqtt' | awk -F": " '{print $2}'
-oc get addressspace -n cloudpi-clients -o=jsonpath='{.items[0].status.endpointStatuses[?(@.name=="messaging")].externalHost}'
-oc get addressspace -n cloudpi-clients -o=jsonpath='{.items[0].status.endpointStatuses[?(@.name=="mqtt")].externalHost}'
+oc get addressspace -n cloudpi-mqtt -o=jsonpath='{.items[0].status.endpointStatuses[?(@.name=="mqtt")].externalHost}'
+```
 
-# get the public keys
-oc get addressspace -n cloudpi-clients -o=jsonpath='{.items[0].status.caCert}' | base64 -D > messaging_client/src/ca_cert.pem
-oc get addressspace -n cloudpi-clients -o=jsonpath='{.items[0].status.endpointStatuses[?(@.name=="mqtt")].cert}' | base64 -D > mqtt_cert.pem
-oc get addressspace -n cloudpi-clients -o=jsonpath='{.items[0].status.endpointStatuses[?(@.name=="messaging")].cert}' | base64 -D > amqp_cert.pem
-mv *.pem messaging-clients/src/
+### Uninstall Enmasse
 
+```shell
+oc delete clusterrolebindings -l app=enmasse
+oc delete crd -l app=enmasse
+oc delete clusterroles -l app=enmasse
+oc delete apiservices -l app=enmasse
+oc delete oauthclients -l app=enmasse
+
+oc delete deployment -l app=enmasse
+oc delete svc -l app=enmasse
 ```
