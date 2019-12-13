@@ -2,9 +2,8 @@
 
 ``shell
 
-oc new-project mqtt-clients
+oc new-project cloudpi-clients
 
-oc apply -f examples/mqtt-clients/deploy.yaml -n mqtt-clients
+oc apply -f examples/mqtt-clients/deploy.yaml -n cloudpi-clients
 
 ```
-

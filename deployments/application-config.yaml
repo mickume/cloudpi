@@ -10,7 +10,7 @@ spec:
   authenticationService:
     name: none-authservice
   endpoints:
-  - name: cloudpi-amqp
+  - name: cloudpi-amqps
     service: messaging
     expose:
       type: route
@@ -18,12 +18,12 @@ spec:
       routeTlsTermination: passthrough
     cert:
       provider: openshift
-  #- name: cloudpi-mqtt
-  #  service: mqtt
-  #  expose:
-  #    type: route
-  #    routeServicePort: amqps
-  #    routeTlsTermination: passthrough
+  - name: cloudpi-wss
+    service: messaging
+    expose:
+      type: route
+      routeServicePort: https
+      routeTlsTermination: passthrough
 
   #- name: cloudpi-amqp
   #  service: messaging

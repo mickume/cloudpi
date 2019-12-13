@@ -4,6 +4,9 @@ ENV LC_ALL="en_US.UTF-8" \
     LANG="en_US.UTF-8" \
     APP_ROOT="/opt/app-root"
 
+# some basics
+RUN yum install -y iputils
+
 # Copy extra files to the image
 COPY ./root/ /
 
