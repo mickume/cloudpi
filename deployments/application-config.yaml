@@ -18,24 +18,13 @@ spec:
       routeTlsTermination: passthrough
     cert:
       provider: openshift
-  - name: cloudpi-wss
-    service: messaging
+  - name: cloudpi-mqtt
+    service: cloudpi-mqtt
     expose:
       type: route
       routeServicePort: https
       routeTlsTermination: passthrough
 
-  #- name: cloudpi-amqp
-  #  service: messaging
-  #  expose:
-  #   type: loadbalancer
-  #   loadBalancerPorts:
-  #   - amqp
-  #   - amqps
-  #  annotations:
-  #    app: enmasse
-  #  loadBalancerSourceRanges:
-  #  - 0.0.0.0/0
 ---
 apiVersion: enmasse.io/v1beta1
 kind: Address
