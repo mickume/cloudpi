@@ -7,19 +7,22 @@ The next section shows how to install the MQTT messaging infrastructure, how to 
 ```shell
 cd bin/enmasse-*
 
-export ENMASSE=enmasse-infra
-oc new-project $ENMASSE
+oc new-project enmasse-infra
 
-oc apply -f install/bundles/enmasse -n $ENMASSE
+oc apply -f install/bundles/enmasse -n enmasse-infra
+```
 
-oc apply -f install/components/example-plans -n $ENMASSE
-oc apply -f install/components/example-roles -n $ENMASSE
+### Install plans and infrastructure configuration
+
+```shell
+oc apply -f install/components/example-plans -n enmasse-infra
+oc apply -f install/components/example-roles -n enmasse-infra
 ```
 
 ### Authentication Service
 
 ```shell
-oc apply -f install/components/example-authservices/standard-authservice.yaml -n $ENMASSE
+oc apply -f install/components/example-authservices/standard-authservice.yaml -n enmasse-infra
 ```
 
 ### Create an address space

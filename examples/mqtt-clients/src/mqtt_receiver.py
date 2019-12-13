@@ -25,7 +25,7 @@ parser.add_option('-a', '--addr', default='sensors')
 options, remainder = parser.parse_args()
 
 client = mqtt.Client(client_id='mqtt_receiver', transport=options.transport)
-client.username_pw_set('cloudpi1', password='Y2xvdWRwaTEK')
+#client.username_pw_set('cloudpi1', password='Y2xvdWRwaTEK')
 
 client.on_connect = on_connect
 client.on_message = on_message

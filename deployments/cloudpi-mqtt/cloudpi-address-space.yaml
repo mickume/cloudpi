@@ -7,3 +7,4 @@ spec:
   plan: standard-unlimited-with-mqtt
   authenticationService:
     name: standard-authservice
+  

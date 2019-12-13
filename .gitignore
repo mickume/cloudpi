@@ -11,6 +11,8 @@ hivemq-ce-*
 *.jks
 *.crt
 stuff.md
+.vscode
+export.yaml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

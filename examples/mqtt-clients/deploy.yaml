@@ -62,6 +62,7 @@ items:
     runPolicy: 'Serial' 
     triggers: 
       - type: 'ImageChange'
+      - type: 'ConfigChange'
     source: 
       git:
         uri: 'https://github.com/mickuehl/cloudpi.git'

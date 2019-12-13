@@ -1,0 +1,60 @@
+apiVersion: enmasse.io/v1beta1
+kind: AddressSpace
+metadata:
+  name: cloudpi
+  labels:
+    app: cloudpi-app
+spec:
+  type: standard
+  plan: standard-small
+  authenticationService:
+    name: none-authservice
+  endpoints:
+  - name: cloudpi-amqp
+    service: messaging
+    expose:
+      type: route
+      routeServicePort: amqps
+      routeTlsTermination: passthrough
+    cert:
+      provider: openshift
+  #- name: cloudpi-mqtt
+  #  service: mqtt
+  #  expose:
+  #    type: route
+  #    routeServicePort: amqps
+  #    routeTlsTermination: passthrough
+
+  #- name: cloudpi-amqp
+  #  service: messaging
+  #  expose:
+  #   type: loadbalancer
+  #   loadBalancerPorts:
+  #   - amqp
+  #   - amqps
+  #  annotations:
+  #    app: enmasse
+  #  loadBalancerSourceRanges:
+  #  - 0.0.0.0/0
+---
+apiVersion: enmasse.io/v1beta1
+kind: Address
+metadata:
+  name: cloudpi.sensors
+  labels:
+    app: cloudpi-app
+spec:
+  address: sensors
+  type: queue
+  plan: standard-small-queue
+---
+apiVersion: enmasse.io/v1beta1
+kind: Address
+metadata:
+  name: cloudpi.cloudpi01
+  labels:
+    app: cloudpi-app
+spec:
+  address: cloudpi01
+  type: anycast
+  plan: standard-small-anycast
