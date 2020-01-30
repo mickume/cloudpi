@@ -34,11 +34,18 @@ A list of usefull resources ...
 
 ### Sense HAT
 
+* https://pythonhosted.org/sense-hat/api/
 * https://github.com/bennuttall/sense-hat-examples
 * https://projects.raspberrypi.org/en/projects?hardware[]=sense-hat
 * https://randomnerdtutorials.com/video-streaming-with-raspberry-pi-camera/
 
+* https://www.cyberciti.biz/faq/linux-find-out-raspberry-pi-gpu-and-arm-cpu-temperature-command/
+
 ### RaspberryPi & Go
 
 * https://gobot.io/documentation/platforms/raspi/
+
+### Camera & streaming
+
+* https://randomnerdtutorials.com/video-streaming-with-raspberry-pi-camera/
 
