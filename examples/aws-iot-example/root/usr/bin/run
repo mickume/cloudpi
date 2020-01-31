@@ -5,11 +5,11 @@ This is a UBI base image
 EOF
 
 # move the keys and certificates to one central location
-mv certs1/root-CA.crt certs/root-CA.crt
-mv certs2/cloudpi.cert.pem certs/cloudpi.cert.pem
-mv certs3/cloudpi.private.key certs/cloudpi.private.key
+#mv certs1/root-CA.crt certs/root-CA.crt
+#mv certs2/cloudpi.cert.pem certs/cloudpi.cert.pem
+#mv certs3/cloudpi.private.key certs/cloudpi.private.key
 # set permissions
-chmod -w certs/*
+#chmod -w certs/*
 
 while true
 do
