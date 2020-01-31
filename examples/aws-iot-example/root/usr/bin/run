@@ -4,6 +4,15 @@ cat <<EOF
 This is a UBI base image
 EOF
 
+# write the current keys and certificates to the local storage
+echo $ROOT_CA > root-CA.crt
+echo $CLOUDPI_CERT > cloudpi00.cert.pem
+echo $CLOUDPI_KEY > cloudpi00.private.key
+# set permissions
+chmod -w root-CA.crt
+chmod -w cloudpi00.cert.pem
+chmod -w cloudpi00.private.key
+
 while true
 do
 	echo "..."

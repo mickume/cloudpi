@@ -23,6 +23,22 @@ items:
       spec:
         containers:
           - env:
+            - name: ROOT_CA
+              valueFrom:
+                configMapKeyRef:
+                  name: root-ca
+                  key: root-CA.crt
+            - name: CLOUDPI_CERT
+              valueFrom:
+                configMapKeyRef:
+                  name: cloudpi-cert
+                  key: cloudpi00.cert.pem
+            - name: CLOUDPI_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: cloudpi-key
+                  key: cloudpi00.private.key
+            
             #- name: MQTT_MESSAGING_URL
             #  value: "mqtt.enmasse-infra.svc"
             

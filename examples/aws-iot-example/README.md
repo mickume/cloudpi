@@ -31,6 +31,20 @@ python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r ../..
 
 python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r root-CA.crt -c cloudpi.cert.pem -k cloudpi.private.key
 
+
+## Deploy to OpenShift
+
+oc new-project aws-iot-example
+oc create -f examples/aws-iot-example/deploy.yaml
+
+oc create configmap root-ca --from-file=certs/root-CA.crt
+oc create configmap cloudpi-cert --from-file=certs/cloudpi00.cert.pem
+oc create configmap cloudpi-key --from-file=certs/cloudpi00.private.key
+
+
+
+
+
 ### References
 
 * https://github.com/aws/aws-iot-device-sdk-python
