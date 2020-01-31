@@ -60,7 +60,7 @@ items:
       git:
         uri: 'https://github.com/mickuehl/cloudpi.git'
         ref: 'master'
-      contextDir: 'examples/aws-iot'
+      contextDir: 'examples/aws-iot-example'
     strategy:
       type: Docker
       dockerStrategy:

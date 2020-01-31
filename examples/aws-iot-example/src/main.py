@@ -121,4 +121,4 @@ while True:
         if args.mode == 'publish':
             print('Published topic %s: %s\n' % (topic, messageJson))
         loopCount += 1
-    time.sleep(1)
+    time.sleep(10)
