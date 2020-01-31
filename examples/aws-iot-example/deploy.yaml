@@ -23,29 +23,47 @@ items:
       spec:
         containers:
           - env:
-            - name: ROOT_CA
-              valueFrom:
-                configMapKeyRef:
-                  name: root-ca
-                  key: root-CA.crt
-            - name: CLOUDPI_CERT
-              valueFrom:
-                configMapKeyRef:
-                  name: cloudpi-cert
-                  key: cloudpi00.cert.pem
-            - name: CLOUDPI_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: cloudpi-key
-                  key: cloudpi00.private.key
             
             #- name: MQTT_MESSAGING_URL
             #  value: "mqtt.enmasse-infra.svc"
             
+            volumeMounts:
+            # /usr/bin/run will move below files to one central location
+            - name: cert-volume-rootca
+              mountPath: /opt/app-root/certs1
+            - name: cert-volume-cert
+              mountPath: /opt/app-root/certs2
+            - name: cert-volume-key
+              mountPath: /opt/app-root/certs3
+
             image: ubi8-aws-iot:latest
             imagePullPolicy: Always
             name: aws-iot
             resources: {}
+        
+        volumes:
+          # /usr/bin/run will move below files to one central location
+          - name: cert-volume-rootca
+            configMap:
+              name: root-ca
+              items:
+              - key: root-CA.crt
+                path: root-CA.crt
+          
+          - name: cert-volume-cert
+            configMap:  
+              name: cloudpi-cert
+              items:
+              - key: cloudpi00.cert.pem
+                path: cloudpi.cert.pem
+          
+          - name: cert-volume-key
+            configMap:  
+              name: cloudpi-key
+              items:
+              - key: cloudpi00.private.key
+                path: cloudpi.private.key
+
     test: false
     triggers:
     - type: ConfigChange

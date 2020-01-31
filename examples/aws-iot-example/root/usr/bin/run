@@ -4,14 +4,12 @@ cat <<EOF
 This is a UBI base image
 EOF
 
-# write the current keys and certificates to the local storage
-echo $ROOT_CA > root-CA.crt
-echo $CLOUDPI_CERT > cloudpi00.cert.pem
-echo $CLOUDPI_KEY > cloudpi00.private.key
+# move the keys and certificates to one central location
+mv certs1/root-CA.crt certs/root-CA.crt
+mv certs2/cloudpi.cert.pem certs/cloudpi.cert.pem
+mv certs3/cloudpi.private.key certs/cloudpi.private.key
 # set permissions
-chmod -w root-CA.crt
-chmod -w cloudpi00.cert.pem
-chmod -w cloudpi00.private.key
+chmod -w certs/*
 
 while true
 do
