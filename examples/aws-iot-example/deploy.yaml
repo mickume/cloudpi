@@ -24,9 +24,19 @@ items:
         containers:
           - env:
             
-            #- name: MQTT_MESSAGING_URL
-            #  value: "mqtt.enmasse-infra.svc"
-            
+            - name: ENDPOINT
+              value: a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com
+            - name: CLIENT_ID
+              value: cloudpi00
+            - name: TOPIC
+              value: cloudpi/test  
+            - name: ROOT_CA_PATH
+              value: certs/ca/root-CA.crt
+            - name: CERT_PATH
+              value: certs/cert/cloudpi.cert.pem
+            - name: KEY_PATH
+              value: /opt/app-root/certs/key
+
             volumeMounts:
             - name: cv-rootca
               mountPath: /opt/app-root/certs/ca

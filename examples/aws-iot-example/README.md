@@ -31,6 +31,8 @@ python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r ../..
 
 python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r root-CA.crt -c cloudpi.cert.pem -k cloudpi.private.key
 
+python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r certs/ca/root-CA.crt -c certs/cert/cloudpi.cert.pem -k certs/key/cloudpi.private.key
+
 
 ## Deploy to OpenShift
 
