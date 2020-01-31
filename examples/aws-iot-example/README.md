@@ -25,9 +25,9 @@ scp -r src pi@$DEVICE_NAME:/home/pi
 
 ## Run the example
 
-python src/basicpubsub.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r certs/root-CA.crt -c certs/cloudpi01.cert.pem -k certs/cloudpi01.private.key
+python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r certs/root-CA.crt -c certs/cloudpi01.cert.pem -k certs/cloudpi01.private.key
 
-python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r ../../certs/root-CA.crt -c ../../certs/cloudpi01.cert.pem -k ../../certs/cloudpi01.private.key
+python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r ../../certs/root-CA.crt -c ../../certs/cloudpi00.cert.pem -k ../../certs/cloudpi00.private.key
 
 python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r root-CA.crt -c cloudpi.cert.pem -k cloudpi.private.key
 

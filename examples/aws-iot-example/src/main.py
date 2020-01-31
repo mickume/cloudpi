@@ -41,9 +41,9 @@ parser.add_argument("-k", "--key", action="store", dest="privateKeyPath", help="
 parser.add_argument("-p", "--port", action="store", dest="port", type=int, help="Port number override")
 parser.add_argument("-w", "--websocket", action="store_true", dest="useWebsocket", default=False,
                     help="Use MQTT over WebSocket")
-parser.add_argument("-id", "--clientId", action="store", dest="clientId", default="basicPubSub",
+parser.add_argument("-id", "--clientId", action="store", dest="clientId", default="cloudpi00",
                     help="Targeted client id")
-parser.add_argument("-t", "--topic", action="store", dest="topic", default="sdk/test/Python", help="Targeted topic")
+parser.add_argument("-t", "--topic", action="store", dest="topic", default="cloudpi/test", help="Targeted topic")
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="both",
                     help="Operation modes: %s"%str(AllowedActions))
 parser.add_argument("-M", "--message", action="store", dest="message", default="Hello World!",
