@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8/python-36
 ENV LC_ALL="en_US.UTF-8" \
     LANG="en_US.UTF-8" \
     APP_ROOT="/opt/app-root" \
-    USER_ID="cloudpi01"
+    USER_ID="cloudpi00"
 
 # some basics
 USER root

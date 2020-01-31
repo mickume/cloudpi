@@ -6,36 +6,29 @@ items:
   apiVersion: 'v1'
   metadata:
     labels:
-      app: mqtt-clients
-    name: mqtt-clients
+      app: aws-iot
+    name: aws-iot
   spec:
     replicas: 1
     selector:
-      app: mqtt-clients
-      deploymentconfig: mqtt-clients
+      app: aws-iot
+      deploymentconfig: aws-iot
     strategy:
       resources: {}
     template:
       metadata:
         labels:
-          app: mqtt-clients
-          deploymentconfig: mqtt-clients
+          app: aws-iot
+          deploymentconfig: aws-iot
       spec:
         containers:
           - env:
-            - name: MQTT_MESSAGING_URL
-              value: "mqtt.enmasse-infra.svc"
-            - name: MQTT_MESSAGING_PORT
-              value: "1883"
-            - name: AMQP_MESSAGING_URL
-              value: "messaging.enmasse-infra.svc"
-            - name: AMQP_MESSAGING_PORT
-              value: "5672"
-            - name: ADDRESS
-              value: sensors
-            image: ubi8-mqtt:latest
+            #- name: MQTT_MESSAGING_URL
+            #  value: "mqtt.enmasse-infra.svc"
+            
+            image: ubi8-aws-iot:latest
             imagePullPolicy: Always
-            name: mqtt-clients
+            name: aws-iot
             resources: {}
     test: false
     triggers:
@@ -43,21 +36,21 @@ items:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - mqtt-clients
+        - aws-iot
         from:
           kind: ImageStreamTag
-          name: ubi8-mqtt:latest
+          name: ubi8-aws-iot:latest
       type: ImageChange
 
 - kind: BuildConfig
   apiVersion: 'v1'
   metadata:
-    name: 'mqtt-clients'
+    name: 'aws-iot'
     annotations:
       description: Base image for everything
       tags: "python,amqp,mqtt"
     labels:
-      app: mqtt-clients
+      app: aws-iot
   spec:
     runPolicy: 'Serial' 
     triggers: 
@@ -76,16 +69,16 @@ items:
     output:
       to:
         kind: ImageStreamTag
-        name: 'ubi8-mqtt:latest'
+        name: 'ubi8-aws-iot:latest'
         #namespace: openshift
 
 - kind: ImageStream
   apiVersion: 'v1'
   metadata:
-    name: 'ubi8-mqtt'
+    name: 'ubi8-aws-iot'
     annotations:
       description: Base image for everything
       tags: "python,amqp,mqtt,aws,iot"
     labels:
-      app: mqtt-clients
+      app: aws-iot
     #namespace: openshift
