@@ -27,7 +27,9 @@ scp -r src pi@$DEVICE_NAME:/home/pi
 
 python src/basicpubsub.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r certs/root-CA.crt -c certs/cloudpi01.cert.pem -k certs/cloudpi01.private.key
 
-python src/test.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r ../../certs/root-CA.crt -c ../../certs/cloudpi01.cert.pem -k ../../certs/cloudpi01.private.key
+python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r ../../certs/root-CA.crt -c ../../certs/cloudpi01.cert.pem -k ../../certs/cloudpi01.private.key
+
+python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r root-CA.crt -c cloudpi.cert.pem -k cloudpi.private.key
 
 ### References
 
@@ -36,3 +38,8 @@ python src/test.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r ../..
 #### Time-out issues
 
 * https://github.com/aws/aws-iot-device-sdk-python/issues/154
+
+
+
+
+oc create configmap <configmap-name> --from-file=</path/to/file/ca.pem>
