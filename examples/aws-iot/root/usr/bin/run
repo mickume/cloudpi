@@ -1,0 +1,11 @@
+#!/bin/sh
+
+cat <<EOF
+This is a UBI base image
+EOF
+
+while true
+do
+	echo "..."
+	sleep 10
+done

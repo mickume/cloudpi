@@ -13,6 +13,7 @@ hivemq-ce-*
 stuff.md
 .vscode
 export.yaml
+env/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
