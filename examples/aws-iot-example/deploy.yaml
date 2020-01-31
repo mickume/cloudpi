@@ -25,17 +25,19 @@ items:
           - env:
             
             - name: ENDPOINT
-              value: a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com
+              value: 'a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com'
             - name: CLIENT_ID
               value: cloudpi00
             - name: TOPIC
-              value: cloudpi/test  
+              value: cloudpi/test
             - name: ROOT_CA_PATH
               value: certs/ca/root-CA.crt
             - name: CERT_PATH
               value: certs/cert/cloudpi.cert.pem
             - name: KEY_PATH
-              value: /opt/app-root/certs/key
+              value: certs/key/cloudpi.private.key
+            - name: EXTRA_PARAMS
+              value: ''
 
             volumeMounts:
             - name: cv-rootca

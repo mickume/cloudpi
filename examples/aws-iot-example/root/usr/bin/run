@@ -6,4 +6,4 @@
 #	sleep 10
 #done
 
-python src/main.py -e $ENDPOINT -id $CLIENT_ID -t $TOPIC -r $ROOT_CA_PATH -c $CERT_PATH -k $KEY_PATH
+python src/main.py -e $ENDPOINT -id $CLIENT_ID -t $TOPIC -r $ROOT_CA_PATH -c $CERT_PATH -k $KEY_PATH $EXTRA_PARAMS
