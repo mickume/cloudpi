@@ -36,9 +36,10 @@ def customCallback(client, userdata, message):
     print("--------------\n\n")
 
 # send a json message to a topic
-def sendMessage(topic, message, count):
+def sendMessage(topic, message, client, count):
     msg = {}
-    msg['message'] = args.message
+    msg['message'] = message
+    msg['sender'] = client
     msg['sequence'] = loopCount
     mjson = json.dumps(msg)
 
@@ -124,7 +125,7 @@ time.sleep(2)
 loopCount = 0
 while True:
     if args.mode == 'both' or args.mode == 'publish':
-        sendMessage(topic, args.message, loopCount)
+        sendMessage(topic, args.message, client, loopCount)
         loopCount += 1
     
     time.sleep(30)

@@ -7,19 +7,19 @@ items:
   metadata:
     labels:
       app: aws-iot
-    name: aws-iot
+    name: aws-iot-publisher
   spec:
     replicas: 1
     selector:
       app: aws-iot
-      deploymentconfig: aws-iot
+      deploymentconfig: aws-iot-publisher
     strategy:
       resources: {}
     template:
       metadata:
         labels:
           app: aws-iot
-          deploymentconfig: aws-iot
+          deploymentconfig: aws-iot-publisher
       spec:
         containers:
           - env:
@@ -27,7 +27,7 @@ items:
             - name: ENDPOINT
               value: 'a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com'
             - name: CLIENT_ID
-              value: pod-pubsub
+              value: pod-publisher
             - name: TOPIC
               value: cloudpi/test
             - name: ROOT_CA_PATH
@@ -37,7 +37,7 @@ items:
             - name: KEY_PATH
               value: certs/key/cloudpi.private.key
             - name: EXTRA_PARAMS
-              value: ''
+              value: '-m publish'
 
             volumeMounts:
             - name: cv-rootca
@@ -49,7 +49,7 @@ items:
 
             image: ubi8-aws-iot:latest
             imagePullPolicy: Always
-            name: aws-iot
+            name: aws-iot-publisher
             resources: {}
         
         volumes:
@@ -80,7 +80,7 @@ items:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - aws-iot
+        - aws-iot-publisher
         from:
           kind: ImageStreamTag
           name: ubi8-aws-iot:latest

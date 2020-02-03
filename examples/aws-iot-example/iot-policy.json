@@ -1,0 +1,34 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Publish",
+        "iot:Receive"
+      ],
+      "Resource": [
+        "arn:aws:iot:eu-central-1:735492435886:topic/cloudpi/test"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Subscribe"
+      ],
+      "Resource": [
+        "arn:aws:iot:eu-central-1:735492435886:topicfilter/cloudpi/test"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Connect"
+      ],
+      "Resource": [
+        "arn:aws:iot:eu-central-1:735492435886:client/pod-*",
+        "arn:aws:iot:eu-central-1:735492435886:client/cloudpi*"
+      ]
+    }
+  ]
+}
