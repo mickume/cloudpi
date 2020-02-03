@@ -1,38 +1,65 @@
 #!/usr/bin/env python
 
 import paho.mqtt.client as mqtt
-import optparse
+import argparse
+
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
-    
+
+
 def on_message(client, userdata, msg):
-    print(msg.topic+" "+str(msg.payload))
+    print("topic -> %s %s" % (msg.topic, msg.payload))
+
 
 def on_publish(mqttc, obj, mid):
     print("mid: " + str(mid))
 
+
 def on_subscribe(mqttc, obj, mid, granted_qos):
     print("Subscribed: " + str(mid) + " " + str(granted_qos))
 
-parser = optparse.OptionParser()
 
-parser.add_option('-p', '--port', type=int, default=1883)
-parser.add_option('-u', '--url', default='localhost')
-parser.add_option('-t', '--transport', default='tcp')
-parser.add_option('-a', '--addr', default='sensors')
+# args
+parser = argparse.ArgumentParser()
+parser.add_argument("-e", "--endpoint", action="store", required=True,
+                    dest="endpoint", help="Your AWS IoT custom endpoint")
+parser.add_argument("-r", "--rootCA", action="store",
+                    required=True, dest="rootCAPath", help="Root CA file path")
+parser.add_argument("-c", "--cert", action="store",
+                    dest="certificatePath", help="Certificate file path")
+parser.add_argument("-k", "--key", action="store",
+                    dest="privateKeyPath", help="Private key file path")
+parser.add_argument("-id", "--clientId", action="store", dest="clientId",
+                    default="pod-mqtt-receiver", help="Targeted client id")
+parser.add_argument("-t", "--topic", action="store", dest="topic",
+                    default="cloudpi/test", help="Targeted topic")
+parser.add_argument("-p", "--port", action="store",
+                    dest="port", type=int, help="Port number override")
+args = parser.parse_args()
 
-options, remainder = parser.parse_args()
+endpoint = args.endpoint
+rootCAPath = args.rootCAPath
+certificatePath = args.certificatePath
+privateKeyPath = args.privateKeyPath
+clientId = args.clientId
+topic = args.topic
+port = 8883
+if args.port:
+    port = args.port
 
-client = mqtt.Client(client_id='mqtt_receiver', transport=options.transport)
-#client.username_pw_set('cloudpi1', password='Y2xvdWRwaTEK')
+client = mqtt.Client(client_id=clientId)
 
+client.tls_set(ca_certs=rootCAPath, certfile=certificatePath,
+               keyfile=privateKeyPath)
 client.on_connect = on_connect
 client.on_message = on_message
 client.on_publish = on_publish
 client.on_subscribe = on_subscribe
 
-client.connect(options.url, options.port, 60)
-client.subscribe(options.addr)
+# connect and subscribe
+client.connect(endpoint, port, 60)
+client.subscribe(topic)
 
+# wait for messages
 client.loop_forever()

@@ -27,7 +27,7 @@ items:
             - name: ENDPOINT
               value: 'a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com'
             - name: CLIENT_ID
-              value: pod-pubsub
+              value: pod-mqtt
             - name: TOPIC
               value: cloudpi/test
             - name: ROOT_CA_PATH
