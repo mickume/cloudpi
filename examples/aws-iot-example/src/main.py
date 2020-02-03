@@ -125,7 +125,7 @@ time.sleep(2)
 loopCount = 0
 while True:
     if args.mode == 'both' or args.mode == 'publish':
-        sendMessage(topic, args.message, client, loopCount)
+        sendMessage(topic, args.message, clientId, loopCount)
         loopCount += 1
     
     time.sleep(30)
