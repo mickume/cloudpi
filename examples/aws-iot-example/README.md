@@ -37,13 +37,12 @@ python src/main.py -e a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com -r certs
 ## Deploy to OpenShift
 
 oc new-project aws-iot-example
-oc create -f examples/aws-iot-example/deploy.yaml
 
 oc create configmap root-ca --from-file=certs/root-CA.crt
 oc create configmap cloudpi-cert --from-file=certs/cloudpi00.cert.pem
 oc create configmap cloudpi-key --from-file=certs/cloudpi00.private.key
 
-
+oc create -f examples/aws-iot-example/deploy.yaml
 
 
 

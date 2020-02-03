@@ -7,17 +7,11 @@ ENV LC_ALL="en_US.UTF-8" \
 
 # some basics
 USER root
-#RUN yum install -y iputils
 
 # Copy extra files to the image
 COPY ./root/ /
 
 WORKDIR ${APP_ROOT}
-
-# Copy the certificates and keys
-#COPY certs/${USER_ID}.cert.pem .
-#COPY certs/${USER_ID}.private.key .
-#COPY certs/root-CA.crt .
 
 # add the code
 COPY src/ src

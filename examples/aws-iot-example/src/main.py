@@ -16,6 +16,7 @@
  '''
 
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+
 import logging
 import time
 import argparse
@@ -23,7 +24,10 @@ import json
 
 AllowedActions = ['both', 'publish', 'subscribe']
 
-# Custom MQTT message callback
+# init the client
+myAWSIoTMQTTClient = None
+
+# MQTT message callback
 def customCallback(client, userdata, message):
     print("Received a new message: ")
     print(message.payload)
@@ -31,6 +35,15 @@ def customCallback(client, userdata, message):
     print(message.topic)
     print("--------------\n\n")
 
+# send a json message to a topic
+def sendMessage(topic, message, count):
+    msg = {}
+    msg['message'] = args.message
+    msg['sequence'] = loopCount
+    mjson = json.dumps(msg)
+
+    myAWSIoTMQTTClient.publish(topic, mjson, 1)
+    print('Published topic %s: %s\n' % (topic, message))
 
 # Read in command-line parameters
 parser = argparse.ArgumentParser()
@@ -71,13 +84,13 @@ if not args.useWebsocket and (not args.certificatePath or not args.privateKeyPat
     parser.error("Missing credentials for authentication.")
     exit(2)
 
-# Port defaults
+# port defaults
 if args.useWebsocket and not args.port:  # When no port override for WebSocket, default to 443
     port = 443
 if not args.useWebsocket and not args.port:  # When no port override for non-WebSocket, default to 8883
     port = 8883
 
-# Configure logging
+# configure logging
 logger = logging.getLogger("AWSIoTPythonSDK.core")
 logger.setLevel(logging.DEBUG)
 streamHandler = logging.StreamHandler()
@@ -85,8 +98,6 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 streamHandler.setFormatter(formatter)
 logger.addHandler(streamHandler)
 
-# Init AWSIoTMQTTClient
-myAWSIoTMQTTClient = None
 if useWebsocket:
     myAWSIoTMQTTClient = AWSIoTMQTTClient(clientId, useWebsocket=True)
     myAWSIoTMQTTClient.configureEndpoint(host, port)
@@ -96,29 +107,24 @@ else:
     myAWSIoTMQTTClient.configureEndpoint(host, port)
     myAWSIoTMQTTClient.configureCredentials(rootCAPath, privateKeyPath, certificatePath)
 
-# AWSIoTMQTTClient connection configuration
+# connection configuration
 myAWSIoTMQTTClient.configureAutoReconnectBackoffTime(1, 32, 20)
 myAWSIoTMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
 myAWSIoTMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
 myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
-myAWSIoTMQTTClient.configureMQTTOperationTimeout(30)  # 5 sec
+myAWSIoTMQTTClient.configureMQTTOperationTimeout(30)  # 30 sec
 
-# Connect and subscribe to AWS IoT
+# connect and subscribe to AWS IoT
 myAWSIoTMQTTClient.connect()
 if args.mode == 'both' or args.mode == 'subscribe':
     myAWSIoTMQTTClient.subscribe(topic, 1, customCallback)
 time.sleep(2)
 
-# Publish to the same topic in a loop forever
+# publish to the same topic in a loop forever
 loopCount = 0
 while True:
     if args.mode == 'both' or args.mode == 'publish':
-        message = {}
-        message['message'] = args.message
-        message['sequence'] = loopCount
-        messageJson = json.dumps(message)
-        myAWSIoTMQTTClient.publish(topic, messageJson, 1)
-        if args.mode == 'publish':
-            print('Published topic %s: %s\n' % (topic, messageJson))
+        sendMessage(topic, args.message, loopCount)
         loopCount += 1
-    time.sleep(10)
+    
+    time.sleep(30)
