@@ -27,7 +27,7 @@ items:
             - name: ENDPOINT
               value: 'a36ob0439j5iyd-ats.iot.eu-central-1.amazonaws.com'
             - name: CLIENT_ID
-              value: pod-mqtt
+              value: pod-mqtt-publisher
             - name: TOPIC
               value: cloudpi/test
             - name: ROOT_CA_PATH
@@ -38,6 +38,8 @@ items:
               value: certs/key/cloudpi.private.key
             - name: EXTRA_PARAMS
               value: ''
+            - name: SCRIPT
+              value: src/mqtt_publisher.py
 
             volumeMounts:
             - name: cv-rootca
