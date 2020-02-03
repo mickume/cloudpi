@@ -1,0 +1,40 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Publish",
+        "iot:Receive"
+      ],
+      "Resource": [
+        "arn:aws:iot:eu-central-1:735492435886:topic/cloudpi/test",
+        "arn:aws:iot:eu-central-1:735492435886:topic/cloudpi/cloudpi01",
+        "arn:aws:iot:eu-central-1:735492435886:topic/cloudpi/cloudpi02",
+        "arn:aws:iot:eu-central-1:735492435886:topic/cloudpi/sensors"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Subscribe"
+      ],
+      "Resource": [
+        "arn:aws:iot:eu-central-1:735492435886:topicfilter/cloudpi/test",
+        "arn:aws:iot:eu-central-1:735492435886:topicfilter/cloudpi/cloudpi01",
+        "arn:aws:iot:eu-central-1:735492435886:topicfilter/cloudpi/cloudpi02",
+        "arn:aws:iot:eu-central-1:735492435886:topicfilter/cloudpi/sensors"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Connect"
+      ],
+      "Resource": [
+        "arn:aws:iot:eu-central-1:735492435886:client/pod-*",
+        "arn:aws:iot:eu-central-1:735492435886:client/cloudpi*"
+      ]
+    }
+  ]
+}
