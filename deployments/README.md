@@ -4,11 +4,11 @@ A set of scripst, templates and Ansible playbooks to configure a new OpenShift c
 
 Basic configuration for all scripts is in file `config`. Review and change accordingly, **DO NOT** store API keys etc. there !
 
-## OpenShift
+### Configure OpenShift
 
 NOTE: Make sure to login into the cluster with `oc login ...` first and select a user that has the **cluster admin role**.
 
-### Add users
+#### Add users
 
 Add a number of default users and with a default password.
 
@@ -19,7 +19,7 @@ cd 01_identity_provider
 
 ```
 
-### Create default namespaces/projects
+#### Create default namespaces/projects
 
 Create a default project for each user and set policies, resource limmits etc.
 
@@ -30,14 +30,14 @@ cd 02_projects
 
 ```
 
-To clean-up everything, run:
+To clean-up everything:
 ```shell
 
 ./delete_projects.sh
 
 ```
 
-### Red Hat CodeReady Workspaces
+#### Red Hat CodeReady Workspaces
 
 To install RHCRW, create a shared infrastructure project first:
 
