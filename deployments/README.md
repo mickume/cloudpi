@@ -8,7 +8,7 @@ Basic configuration for all scripts is in file `config`. Review and change accor
 
 NOTE: Make sure to login into the cluster with `oc login ...` first and select a user that has the **cluster admin role**.
 
-#### Add users
+#### Step 1: Add users
 
 Add a number of default users and with a default password.
 
@@ -19,7 +19,7 @@ cd 01_identity_provider
 
 ```
 
-#### Create default namespaces/projects
+#### Step 2: Create default namespaces/projects
 
 Create a default project for each user and set policies, resource limmits etc.
 
@@ -37,7 +37,7 @@ To clean-up everything:
 
 ```
 
-#### Red Hat CodeReady Workspaces
+#### Step 3: Install Red Hat CodeReady Workspaces
 
 To install RHCRW, create a shared infrastructure project first:
 

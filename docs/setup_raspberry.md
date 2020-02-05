@@ -1,6 +1,8 @@
-# Setup the Raspberry Pi
+## Setup the Raspberry Pi
 
-### Preapre the boot disk
+### Prepare the boot disk
+
+#### Step 1: Create a bootable image
 
 ```shell
 diskutil list
@@ -14,7 +16,7 @@ sudo dd bs=1m if=2019-09-26-raspbian-buster-lite.img of=/dev/disk2 conv=sync
 diskutil unmountDisk /dev/disk2
 ```
 
-### Setup Wifi for first boot
+#### Step 2: Setup Wifi for first boot (verify this !)
 
 ```shell
 country=DE
@@ -29,17 +31,17 @@ network={
 
 Save this file to the root of boot partition with the filename `wpa_supplicant.conf`.
 
-### Enable SSH for first boot
+#### Step 3: Enable SSH for first boot
 
 Put a file named **ssh** in the root of your **boot** partition.
 
-### Find your Raspberry Pi on the network
+#### Step 4: Find your Raspberry Pi on the network
 
 ```shell
 ping rasberrypi.local
 ```
 
-### Connect to your Raspberry Pi
+#### Step 5: Connect to your Raspberry Pi
 
 ```shell
 ssh pi@raspberrypi
@@ -47,14 +49,14 @@ ssh pi@raspberrypi
 
 Password is `raspberry` initially.
 
-### Update the boot image
+#### Step 6: Update the boot image
 
 ```shell
 sudo apt-get update
 sudo apt-get upgrade
 ```
 
-### Config the Raspberry Pi
+#### Step 7: Config the Raspberry Pi
 
 ```shell
 sudo raspi-config
@@ -91,14 +93,3 @@ python3 -m virtualenv -p python3 env --system-site-packages
 echo "source env/bin/activate" >> ~/.bashrc
 source ~/.bashrc
 ```
-
-### Install python libs
-
-```shell
-sudo pip3 install astro-pi
-sudo pip3 install paho-mqtt
-sudo pip3 install cryptography
-sudo pip3 install pyjwt
-```
-
-### 
