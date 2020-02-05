@@ -1,0 +1,13 @@
+#/bin/bash
+
+NUM_USERS=5
+
+USER_BASE_NAME='user'
+USER_DEFAULT_PWD='password1#'
+
+TEMP_PWD_FILE='workshop_htpasswd'
+
+PROJECT_BASE_NAME='workshop'
+
+SUPERUSER_NAME='theboss'
+SUPERUSER_DEFAULT_PWD='password1#'
