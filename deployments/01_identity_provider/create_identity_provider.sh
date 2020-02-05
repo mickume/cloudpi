@@ -15,8 +15,8 @@ do
 done
 
 # create the secret
-oc delete secret htpass-secret -n openshift-config
-oc create secret generic htpass-secret --from-file=htpasswd=$TEMP_PWD_FILE -n openshift-config
+oc delete secret workshop-htpass-secret -n openshift-config
+oc create secret generic workshop-htpass-secret --from-file=htpasswd=$TEMP_PWD_FILE -n openshift-config
 
 # deploy the custom identity provider (htpass based)
 oc apply -f identity_provider_cr.yaml

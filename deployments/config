@@ -9,5 +9,5 @@ TEMP_PWD_FILE='workshop_htpasswd'
 
 PROJECT_BASE_NAME='workshop'
 
-SUPERUSER_NAME='theboss'
+SUPERUSER_NAME='adminuser'
 SUPERUSER_DEFAULT_PWD='password1#'
