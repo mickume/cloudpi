@@ -1,4 +1,4 @@
-# Configure the Infrastructure
+## Configure the Infrastructure
 
 A set of scripst, templates and Ansible playbooks to configure a new OpenShift cluster (>= 4.2.x) and other infrastructure.
 
