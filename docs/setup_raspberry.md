@@ -69,8 +69,8 @@ sudo raspi-config
  
 Change the following:
 
-* change default password for pi
-* change hostname
+* change the default password for pi
+* change the hostname
 
 Enable
 
@@ -81,7 +81,7 @@ Enable
 
 Choose and hit enter. Reboot.
 
-### Install dependencies
+### Install basic dependencies
 
 ```shell
 sudo apt-get install -y build-essential i2c-tools avahi-utils joystick libopenjp2-7-dev \
@@ -91,10 +91,10 @@ sudo apt-get install -y build-essential i2c-tools avahi-utils joystick libopenjp
   libffi-dev libffi-dev sense-hat
 ```
 
-### Setup virtual env
+### Setup a python virtual env
 
 ```shell
-python3 -m virtualenv -p python3 env --system-site-packages
-echo "source env/bin/activate" >> ~/.bashrc
+python3 -m virtualenv -p python3 venv --system-site-packages
+echo "source venv/bin/activate" >> ~/.bashrc
 source ~/.bashrc
 ```
