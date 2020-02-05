@@ -29,11 +29,16 @@ network={
 }
 ```
 
-Save this file to the root of boot partition with the filename `wpa_supplicant.conf`.
+Save this file to the root of boot partition with the filename `/boot/wpa_supplicant.conf`.
 
 #### Step 3: Enable SSH for first boot
 
 Put a file named **ssh** in the root of your **boot** partition.
+
+```shell
+touch /boot/ssh
+```
+
 
 #### Step 4: Find your Raspberry Pi on the network
 
