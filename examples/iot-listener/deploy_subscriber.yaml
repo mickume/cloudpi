@@ -36,8 +36,10 @@ items:
               value: certs/cert/cloudpi.cert.pem
             - name: KEY_PATH
               value: certs/key/cloudpi.private.key
+            - name: SOURCE_FILE
+              value: 'src/main.py'
             - name: EXTRA_PARAMS
-              value: '-m subscribe'
+              value: ''
 
             volumeMounts:
             - name: cv-rootca

@@ -25,26 +25,28 @@ update_config=1
 
 network={
     ssid="<your network name>"
+    scan_ssid=1
     psk="<your password>"
 }
 ```
 
-Save this file to the root of boot partition with the filename `/boot/wpa_supplicant.conf`.
+Save this file to the root of boot partition with the filename `/Volumes/boot/wpa_supplicant.conf`.
 
 #### Step 3: Enable SSH for first boot
 
 Put a file named **ssh** in the root of your **boot** partition.
 
 ```shell
-touch /boot/ssh
+touch /Volumes/boot/ssh
 ```
-
 
 #### Step 4: Find your Raspberry Pi on the network
 
 ```shell
 ping rasberrypi.local
 ```
+
+### Boot the Raspberry and finalize the setup
 
 #### Step 5: Connect to your Raspberry Pi
 
@@ -54,47 +56,40 @@ ssh pi@raspberrypi
 
 Password is `raspberry` initially.
 
-#### Step 6: Update the boot image
+#### Step 6: Change the password
+
+Once logged in, change the password for the `pi` user:
 
 ```shell
-sudo apt-get update
-sudo apt-get upgrade
+passwd
 ```
 
-#### Step 7: Config the Raspberry Pi
+#### Step 7: Change the hostname
+
+```shell
+sudo vi /etc/hostname
+```
+
+#### Step 8: Config the Raspberry Pi hardware and other OS settings
 
 ```shell
 sudo raspi-config
 ```
  
-Change the following:
-
-* change the default password for pi
-* change the hostname
-
-Enable
+Enable HW interfaces
 
 * Interfacing Options | ssh
 * Interfacing Options | I2C
 * Interfacing Options | Camera
+* Interfacing Options | Remote GPIO
 * Advanced Options | Exapand Filesystem
 
 Choose and hit enter. Reboot.
 
-### Install basic dependencies
+#### Step 9: Install your public key
+
+Finally, install you public key to enable login without a password.
 
 ```shell
-sudo apt-get install -y build-essential i2c-tools avahi-utils joystick libopenjp2-7-dev \
-  libtiff5-dev gfortran libatlas-base-dev libopenblas-dev libhdf5-serial-dev git ntp \
-  python3 python3-dev python3-pip python3-virtualenv \
-  python3-numpy python3-picamera python3-pandas python3-rpi.gpio \
-  libffi-dev libffi-dev sense-hat
-```
-
-### Setup a python virtual env
-
-```shell
-python3 -m virtualenv -p python3 venv --system-site-packages
-echo "source venv/bin/activate" >> ~/.bashrc
-source ~/.bashrc
+cat ~/.ssh/cloudpi_rsa.pub | ssh <USERNAME>@<IP-ADDRESS> 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
 ```

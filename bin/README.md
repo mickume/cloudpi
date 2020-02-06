@@ -2,5 +2,6 @@
 
 Place the following here ...
 
-* *2019-09-26-raspbian-buster-lite.img
-* enmasse-*/
+Latest version of the raspbian image:
+
+* 2019-09-26-raspbian-buster-lite.img

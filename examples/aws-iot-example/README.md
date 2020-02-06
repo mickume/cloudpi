@@ -9,7 +9,7 @@ Install the certificates on the device
 ```shell
 export DEVICE_NAME=cloudpi01
 
-CERTS="certs/$DEVICE_NAME.cert.pem certs/$DEVICE_NAME.public.key certs/$DEVICE_NAME.private.key certs/root-CA.crt"
+CERTS="certs/cloudpi00.cert.pem certs/cloudpi00.private.key certs/root-CA.crt"
 scp $CERTS pi@$DEVICE_NAME:/home/pi/certs/
 
 ```
