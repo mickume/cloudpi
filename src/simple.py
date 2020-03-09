@@ -2,45 +2,38 @@
 # -*- coding: utf-8 -*-
 
 import time
-import sys
-from cardboard.motors import Motors
+from cardboard import Vehicle, Motor
 
+class Drive:
+    def __init__(self):
+        self.speed = 0.0
+        self.m = Motor()
 
-def drive(speed, t, al, ar):
-    motors = Motors(al, ar)
+    def run(self, x):
+        print("run", x)
 
-    motors.forward(speed)
-    time.sleep(t)
+    def update(self):
+        print("update")
+        #self.m.forward(self.speed)
 
-    # cleaning up
-    motors.stop()
+    def run_threaded(self, x):
+        if self.speed == x:
+            return
+        self.speed = x
+        self.m.forward(x)
 
+    def shutdown(self):
+        self.speed = 0.0
+        self.m.stop()
+    
 
 if __name__ == '__main__':
-    # initialize the motors
-    print("Starting the engines ...")
+    v = Vehicle()
 
-    # defaults
-    speed = 0.5
-    t = 1.0
-    al = 1.0
-    ar = 1.0
+    v.mem['speed'] = 0.4
 
-    params = len(sys.argv)
-    if params == 2:
-        speed = float(sys.argv[1])
-    elif params == 3:
-        speed = float(sys.argv[1])
-        t = float(sys.argv[2])
-    elif params > 3:
-        speed = float(sys.argv[1])
-        t = float(sys.argv[2])
-        al = float(sys.argv[3])
-        ar = float(sys.argv[4])
+    drive = Drive()
+    v.add(drive, inputs=['speed'], threaded=True)
 
-    # Go !
-    print("Go!")
-    drive(speed, t, al, ar)
-
-    # done
-    print("\nParked.")
+    # start the drive loop at 10 Hz for 3 sec.
+    v.start(rate_hz=10, max_loop_count=30, verbose=True)

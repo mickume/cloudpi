@@ -11,7 +11,7 @@ MOTOR_MIN = -1.0
 MOTOR_THRESHOLD = 0.9
 MOTOR_DELAY = 0.5
 
-class Motors:
+class Motor:
   def __init__(self, aleft=1.0, aright=1.0):
     self.mleft = 0.0 # speed
     self.mright = 0.0
@@ -58,6 +58,8 @@ class Motors:
     self.set_right(self.mright - MOTOR_INC)
 
   def set_left(self, s):
+    if self.mleft == s:
+      return
     if s < MOTOR_MIN:
       self.mleft = 0.0
     elif s > MOTOR_MAX:
@@ -68,6 +70,8 @@ class Motors:
     self.kit.motor2.throttle = self.mleft * self.aleft
 
   def set_right(self, s):
+    if self.mright == s:
+      return
     if s < MOTOR_MIN:
       self.mright = 0.0
     elif s > MOTOR_MAX:
