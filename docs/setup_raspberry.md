@@ -86,7 +86,13 @@ Enable HW interfaces
 
 Choose and hit enter. Reboot.
 
-#### Step 9: Install your public key
+#### Step 9: Create a key-pair
+
+```shell
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+#### Step 10: Install your public key
 
 Finally, install you public key to enable login without a password.
 
