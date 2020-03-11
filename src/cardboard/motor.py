@@ -45,17 +45,17 @@ class Motor:
     self.set_left(speed)
     self.set_right(speed)
     
-  def inc_left(self):
-    self.set_left(self.mleft + MOTOR_INC)
+  def inc_left(self, inc = MOTOR_INC):
+    self.set_left(self.mleft + inc)
 
-  def dec_left(self):
-    self.set_left(self.mleft - MOTOR_INC)
+  def dec_left(self, dec = MOTOR_INC):
+    self.set_left(self.mleft - dec)
 
-  def inc_right(self):
-    self.set_right(self.mright + MOTOR_INC)
+  def inc_right(self, inc = MOTOR_INC):
+    self.set_right(self.mright + inc)
 
-  def dec_right(self):
-    self.set_right(self.mright - MOTOR_INC)
+  def dec_right(self, dec = MOTOR_INC):
+    self.set_right(self.mright - dec)
 
   def set_left(self, s):
     if self.mleft == s:

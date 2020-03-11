@@ -12,7 +12,7 @@ class PartProfiler:
         self.records = {}
 
     def profile_part(self, p):
-        self.records[p] = { "times" : [] }
+        self.records[p] = {"times": []}
 
     def on_part_start(self, p):
         self.records[p]['times'].append(time.time())
@@ -79,7 +79,8 @@ class Vehicle:
         """
         assert type(inputs) is list, "inputs is not a list: %r" % inputs
         assert type(outputs) is list, "outputs is not a list: %r" % outputs
-        assert type(threaded) is bool, "threaded is not a boolean: %r" % threaded
+        assert type(
+            threaded) is bool, "threaded is not a boolean: %r" % threaded
 
         p = part
         print('Adding part {}.'.format(p.__class__.__name__))
@@ -177,7 +178,7 @@ class Vehicle:
             if entry.get('run_condition'):
                 run_condition = entry.get('run_condition')
                 run = self.mem.get([run_condition])[0]
-            
+
             if run:
                 # get part
                 p = entry['part']
@@ -197,7 +198,7 @@ class Vehicle:
                 # finish timing part run
                 self.profiler.on_part_finished(p)
 
-    def stop(self):        
+    def stop(self):
         print('Shutting down vehicle and its parts...')
         for entry in self.parts:
             try:
